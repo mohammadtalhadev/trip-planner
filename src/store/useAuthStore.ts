@@ -1,31 +1,28 @@
-import { create } from 'zustand';
+﻿import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+
+interface AuthUser {
+  id: string;
+  name: string;
+  email: string;
+  avatar?: string;
+}
 
 interface AuthState {
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    avatar?: string;
-  } | null;
+  user: AuthUser | null;
   isAuthenticated: boolean;
-  login: (userData: {
-    id: string;
-    name: string;
-    email: string;
-    avatar?: string;
-  }) => void;
+  login: (userData: AuthUser) => void;
   logout: () => void;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
-  user: null,
-  isAuthenticated: false,
-  login: (userData) => set({
-    user: userData,
-    isAuthenticated: true
-  }),
-  logout: () => set({
-    user: null,
-    isAuthenticated: false
-  }),
-}));
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set) => ({
+      user: null,
+      isAuthenticated: false,
+      login: (user) => set({ user, isAuthenticated: true }),
+      logout: () => set({ user: null, isAuthenticated: false }),
+    }),
+    { name: 'tripplanner-auth' },
+  ),
+);

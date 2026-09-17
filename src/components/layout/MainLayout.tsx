@@ -1,41 +1,20 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 
 export function MainLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-indigo-50">
-      <header className="bg-white/80 backdrop-blur-[24px] border-b border-white/90 shadow-level1 p-4">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-              TripPlanner
-            </h1>
-            <nav className="flex gap-4">
-              <Link to="/" className="px-3 py-1 rounded-md text-sm font-medium hover:bg-white/70 transition-colors">
-                Home
-              </Link>
-              <Link to="/destinations" className="px-3 py-1 rounded-md text-sm font-medium hover:bg-white/70 transition-colors">
-                Destinations
-              </Link>
-              <Link to="/trips" className="px-3 py-1 rounded-md text-sm font-medium hover:bg-white/70 transition-colors">
-                My Trips
-              </Link>
-              <Link to="/profile" className="px-3 py-1 rounded-md text-sm font-medium hover:bg-white/70 transition-colors">
-                Profile
-              </Link>
-            </nav>
-          </div>
+    <div className='min-h-full bg-gradient-to-br from-slate-50 to-indigo-50 dark:from-[#101322] dark:to-[#1b1533]'>
+      <header className='sticky top-0 z-40 border-b border-white/90 bg-white/80 p-4 shadow-level1 backdrop-blur-[24px] dark:border-white/10 dark:bg-[#14172a]/80'>
+        <div className='mx-auto flex max-w-6xl items-center justify-between px-6'>
+          <Link to='/app' className='text-xl font-extrabold text-on-surface dark:text-white'>TripPlanner</Link>
+          <nav className='flex gap-3 text-sm'>
+            <Link to='/app/trips' className='rounded-full px-3 py-1.5 font-medium text-on-surface/70 transition hover:bg-white/70 dark:text-white/70'>Trips</Link>
+            <Link to='/app/saved' className='rounded-full px-3 py-1.5 font-medium text-on-surface/70 transition hover:bg-white/70 dark:text-white/70'>Saved</Link>
+            <Link to='/app/settings' className='rounded-full px-3 py-1.5 font-medium text-on-surface/70 transition hover:bg-white/70 dark:text-white/70'>Settings</Link>
+            <Link to='/' className='rounded-full bg-secondary-container/40 px-3 py-1.5 font-bold text-secondary'>Discover</Link>
+          </nav>
         </div>
       </header>
-
-      <main className="max-w-7xl mx-auto px-6 py-8">
-        {children}
-      </main>
-
-      <footer className="bg-white/80 backdrop-blur-[24px] border-t border-white/90 shadow-level1 p-4">
-        <div className="max-w-7xl mx-auto px-6 text-center text-sm text-slate-500">
-          &copy; {new Date().getFullYear()} TripPlanner. All rights reserved.
-        </div>
-      </footer>
+      <main className='mx-auto max-w-6xl px-6 py-8 dark:text-white'>{children}</main>
     </div>
   );
 }
