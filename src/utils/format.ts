@@ -49,17 +49,28 @@ export function weatherLabel(code: number): string {
   return WEATHER_CODES[code] ?? 'Unknown';
 }
 
+const ICONS = {
+  sun: String.fromCodePoint(0x2600) + '\uFE0F',
+  partly: String.fromCodePoint(0x26c5),
+  fog: String.fromCodePoint(0x1f32b) + '\uFE0F',
+  rain: String.fromCodePoint(0x1f327) + '\uFE0F',
+  snow: String.fromCodePoint(0x2744) + '\uFE0F',
+  heavyRain: String.fromCodePoint(0x1f328) + '\uFE0F',
+  storm: String.fromCodePoint(0x26c8) + '\uFE0F',
+};
+
 export function weatherIcon(code: number): string {
-  if (code === 0) return '\u2600\uFE0F';
-  if (code <= 3) return '\u26C5';
-  if (code <= 48) return '\u1F32B\uFE0F';
-  if (code <= 67) return '\u1F327\uFE0F';
-  if (code <= 77) return '\u2744\uFE0F';
-  if (code <= 82) return '\u1F327\uFE0F';
-  if (code <= 86) return '\u1F328\uFE0F';
-  return '\u26C8\uFE0F';
+  if (code === 0) return ICONS.sun;
+  if (code <= 3) return ICONS.partly;
+  if (code <= 48) return ICONS.fog;
+  if (code <= 67) return ICONS.rain;
+  if (code <= 77) return ICONS.snow;
+  if (code <= 82) return ICONS.rain;
+  if (code <= 86) return ICONS.heavyRain;
+  return ICONS.storm;
 }
 
 export function uid(): string {
   return Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
 }
+
