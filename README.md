@@ -1,75 +1,81 @@
-# React + TypeScript + Vite
+# TripPlanner
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Smart travel planning web application — discover destinations, build multi-day itineraries, manage trip budgets, and save favorite places.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+_TODO: 2-3 sentence summary of what the app does and why it was built (fill in once core features are working)._
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- [ ] Destination search with debounced input and suggestions
+- [ ] Destination details with weather, attractions, restaurants, hotels
+- [ ] Trip creation (name, destination, dates, travelers, budget)
+- [ ] Multi-day itinerary builder (add/edit/delete/reorder activities, move between days)
+- [ ] Budget & expense tracking with category breakdown
+- [ ] Saved places (bookmarks), persisted locally
+- [ ] User preferences (currency, temperature unit, theme, default travelers)
+- [ ] Trip dashboard with live summary stats
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React + Vite + TypeScript
+- Tailwind CSS
+- React Router
+- Zustand (state management)
+- Axios (API requests)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## APIs Used
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+| API | Purpose |
+|---|---|
+| Open-Meteo | Current weather + forecast |
+| REST Countries | Country info (capital, population, currency, region, flag) |
+| Nominatim (OpenStreetMap) | Geocoding / location lookup |
+| _TBD_ | Attractions / restaurants / hotels |
+| _TBD_ | Images (if used) |
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Setup
 
+```bash
+git clone https://github.com/mohammadtalhadev/trip-planner.git
+cd trip-planner
+npm install
+cp .env.example .env.local
+# fill in .env.local with your own API keys
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+## Environment Variables
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+See `.env.example` for the full list. All variables must be prefixed `VITE_` to be exposed to the client.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project Structure
 
-```
+src/
+├── components/
+│ ├── common/ # Reusable UI primitives (GlassCard, GlassButton, etc.)
+│ ├── layout/ # Sidebar, TopBar, BottomNav, AppLayout
+│ ├── destination/
+│ ├── itinerary/
+│ ├── budget/
+│ └── dashboard/
+├── pages/
+├── hooks/
+├── services/
+├── store/
+├── utils/
+├── types/
+└── routes/
+
+
+## State Management Approach
+
+_TODO: fill in once Phase 3 is built — explain why Zustand was chosen over Context/Redux, how the nested Trip → Days → Activities/Expenses tree is modeled, and how localStorage persistence is handled._
+
+## Key Technical Decisions
+
+_TODO: running log — add an entry each time you make a decision worth defending in the demo, e.g.:_
+- _Why AbortController is used for search requests_
+- _Why debounce delay was set to X ms_
+- _Where memoization was applied and why_
