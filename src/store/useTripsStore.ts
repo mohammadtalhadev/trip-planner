@@ -35,7 +35,8 @@ export const useTripsStore = create<TripsState>()(
       trips: [],
 
       addTrip: (data) => {
-        const dayCount = Math.max(1, Math.min(30, Math.round((new Date(data.endDate).getTime() - new Date(data.startDate).getTime()) / 86_400_000) + 1));`n        const days: TripDay[] = Array.from({ length: dayCount }, (_, i) => ({
+        const dayCount = Math.max(1, Math.min(30, Math.round((new Date(data.endDate).getTime() - new Date(data.startDate).getTime()) / 86_400_000) + 1));
+        const days: TripDay[] = Array.from({ length: dayCount }, (_, i) => ({
           id: uid(),
           date: addDays(data.startDate, i),
           activities: [],
@@ -149,4 +150,5 @@ export const useTripsStore = create<TripsState>()(
     { name: 'tripplanner-trips' },
   ),
 );
+
 
